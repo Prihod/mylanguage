@@ -1,0 +1,42 @@
+{
+  parserClass="com.example.mylanguage.lang.parser.MyParser"
+  parserUtilClass="com.example.mylanguage.lang.parser.MyParserUtil"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="My"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.example.mylanguage.lang.psi"
+  psiImplPackage="com.example.mylanguage.lang.impl"
+
+  elementTypeHolderClass="com.example.mylanguage.lang.psi.MyTypes"
+  elementTypeClass="com.example.mylanguage.lang.psi.MyElement"
+  tokenTypeClass="com.example.mylanguage.lang.psi.MyTokenType"
+  psiImplUtilClass="com.example.mylanguage.lang.psi.impl.MyPsiImplUtil"
+}
+
+root ::= statement*
+
+private statement ::= (pls_var|link_var|COMMENT|CONTENT)
+
+pls_var::= (tag_open SIGN_PLS IDENTIFIER tag_close) {
+      pin=2
+      mixin="com.example.mylanguage.lang.psi.impl.elements.MyTagElementImpl"
+      implements="com.example.mylanguage.lang.psi.elements.MyTagElement"
+      methods=[getTagOpen getTagClose getName setName getNameIdentifier]
+}
+
+link_var::= (tag_open  SIGN_LINK ID tag_close) {
+      pin=2
+      mixin="com.example.mylanguage.lang.psi.impl.elements.MyTagElementImpl"
+      implements="com.example.mylanguage.lang.psi.elements.MyTagElement"
+      methods=[getTagOpen getTagClose getName setName getNameIdentifier]
+}
+
+
+private tag_open ::= TAG_OPEN {
+    name="[["
+}
+private tag_close ::= TAG_CLOSE {
+    name="]]"
+}

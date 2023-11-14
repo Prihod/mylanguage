@@ -1,0 +1,44 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.example.MyLanguage</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>MyLanguage</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.jetbrains.php</depends>
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="My"
+                  implementationClass="com.example.mylanguage.lang.MyFileType"
+                  fieldName="INSTANCE"
+                  language="My"
+                  extensions="my"/>
+        <lang.parserDefinition language="My" implementationClass="com.example.mylanguage.lang.parser.MyParserDefinition"/>
+        <lang.fileViewProviderFactory language="My" implementationClass="com.example.mylanguage.lang.MyFileViewProviderFactory"/>
+        <braceMatcher filetype="My" implementationClass="com.example.mylanguage.lang.braces.MyBraceMatcher"/>
+        <lang.formatter language="My" implementationClass="com.example.mylanguage.lang.formatter.MyFormattingModelBuilder"/>
+        <editorHighlighterProvider filetype="My" implementationClass="com.example.mylanguage.lang.MyHighlighterProvider"/>
+        <annotator language="My" implementationClass="com.example.mylanguage.lang.inspections.MyAnnotator"/>
+        <highlightErrorFilter implementation="com.example.mylanguage.lang.inspections.MyErrorFilter"/>
+        <completion.contributor language="My" implementationClass="com.example.mylanguage.lang.completion.MyCompletionContributor"/>
+        <typedHandler implementation="com.example.mylanguage.lang.completion.MyCompletionAutoPopupHandler"/>
+        <typedHandler implementation="com.example.mylanguage.lang.completion.MyTypedHandler" order="before xmlSlash"/>
+    </extensions>
+</idea-plugin>
