@@ -12,6 +12,12 @@ import org.jetbrains.annotations.NotNull;
 public class MyCompletionContributor extends CompletionContributor {
     private static final Logger LOG = Logger.getInstance(MyCompletionContributor.class);
 
+    @Override
+    public void beforeCompletion(@NotNull CompletionInitializationContext context) {
+        context.setDummyIdentifier(String.valueOf(""));
+
+    }
+
     public MyCompletionContributor() {
 
         extend(CompletionType.BASIC, PlatformPatterns.psiElement(MyTypes.ID), new CompletionProvider<CompletionParameters>() {
@@ -35,7 +41,7 @@ public class MyCompletionContributor extends CompletionContributor {
             }
         });
 
-        extend(CompletionType.BASIC, PlatformPatterns.psiElement(MyTypes.IDENTIFIER), new CompletionProvider<CompletionParameters>() {
+       /* extend(CompletionType.BASIC, PlatformPatterns.psiElement(MyTypes.IDENTIFIER), new CompletionProvider<CompletionParameters>() {
             @Override
             protected void addCompletions(@NotNull CompletionParameters parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet result) {
                 PsiElement element = parameters.getPosition();
@@ -45,6 +51,7 @@ public class MyCompletionContributor extends CompletionContributor {
 
                 LOG.warn("---------------IDENTIFIER------------------");
                 LOG.warn("position=" + element);
+                LOG.warn("text=" + element.getText());
                 LOG.warn("original position=" +  parameters.getOriginalPosition());
                 LOG.warn("parent=" + parent);
                 if (prevSibling != null) {
@@ -54,7 +61,7 @@ public class MyCompletionContributor extends CompletionContributor {
                     LOG.warn("nextSibling=" + nextSibling);
                 }
             }
-        });
+        });*/
 
        /* extend(CompletionType.BASIC, PlatformPatterns.psiElement(), new CompletionProvider<CompletionParameters>() {
             @Override

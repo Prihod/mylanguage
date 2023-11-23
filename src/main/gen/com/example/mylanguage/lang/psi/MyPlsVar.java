@@ -8,6 +8,9 @@ import com.example.mylanguage.lang.psi.elements.MyTagElement;
 
 public interface MyPlsVar extends MyTagElement {
 
+  @Nullable
+  PsiElement getIdentifier();
+
   @Nullable PsiElement getTagOpen();
 
   @Nullable PsiElement getTagClose();

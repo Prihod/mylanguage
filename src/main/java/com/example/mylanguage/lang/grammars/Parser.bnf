@@ -13,17 +13,33 @@
   elementTypeClass="com.example.mylanguage.lang.psi.MyElement"
   tokenTypeClass="com.example.mylanguage.lang.psi.MyTokenType"
   psiImplUtilClass="com.example.mylanguage.lang.psi.impl.MyPsiImplUtil"
+
+  tokens = [
+    TAG_OPEN="[["
+      TAG_CLOSE="]]"
+        SIGN_PLS="+"
+        SIGN_LINK="~"
+        ID="regexp:[\d]+"
+        IDENTIFIER="regexp:[a-zA-Z0-9_\.]+"
+
+      ]
+
 }
 
 root ::= statement*
 
-private statement ::= (pls_var|link_var|COMMENT|CONTENT)
+private statement ::= (tags|COMMENT|CONTENT)
+
+private tags ::= (pls_var|link_var) {
+  recoverWhile = parser_recover
+}
 
 pls_var::= (tag_open SIGN_PLS IDENTIFIER tag_close) {
       pin=2
       mixin="com.example.mylanguage.lang.psi.impl.elements.MyTagElementImpl"
       implements="com.example.mylanguage.lang.psi.elements.MyTagElement"
       methods=[getTagOpen getTagClose getName setName getNameIdentifier]
+
 }
 
 link_var::= (tag_open  SIGN_LINK ID tag_close) {
@@ -40,3 +56,5 @@ private tag_open ::= TAG_OPEN {
 private tag_close ::= TAG_CLOSE {
     name="]]"
 }
+
+private parser_recover::= !(tag_open|CONTENT);

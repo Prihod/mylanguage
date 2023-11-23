@@ -15,6 +15,7 @@ import com.intellij.psi.templateLanguages.ConfigurableTemplateLanguageFileViewPr
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.templateLanguages.TemplateDataLanguageMappings;
 import com.intellij.psi.tree.IElementType;
+import com.jetbrains.smarty.SmartyLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -95,7 +96,7 @@ public class MyFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvi
 
     @Override
     public @NotNull Set<Language> getLanguages() {
-        return Set.of(myBaseLanguage, getTemplateDataLanguage());
+        return Set.of(myBaseLanguage, getTemplateDataLanguage(), SmartyLanguage.INSTANCE);
     }
 
     @Override

@@ -29,6 +29,12 @@ public class MyLinkVarImpl extends MyTagElementImpl implements MyLinkVar {
   }
 
   @Override
+  @Nullable
+  public PsiElement getId() {
+    return findChildByType(ID);
+  }
+
+  @Override
   public @Nullable PsiElement getTagOpen() {
     return MyPsiImplUtil.getTagOpen(this);
   }

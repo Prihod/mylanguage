@@ -29,6 +29,12 @@ public class MyPlsVarImpl extends MyTagElementImpl implements MyPlsVar {
   }
 
   @Override
+  @Nullable
+  public PsiElement getIdentifier() {
+    return findChildByType(IDENTIFIER);
+  }
+
+  @Override
   public @Nullable PsiElement getTagOpen() {
     return MyPsiImplUtil.getTagOpen(this);
   }

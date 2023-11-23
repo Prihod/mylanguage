@@ -15,10 +15,10 @@ public interface MyTypes {
   IElementType CONTENT = new MyTokenType("CONTENT");
   IElementType ID = new MyTokenType("ID");
   IElementType IDENTIFIER = new MyTokenType("IDENTIFIER");
-  IElementType SIGN_LINK = new MyTokenType("SIGN_LINK");
-  IElementType SIGN_PLS = new MyTokenType("SIGN_PLS");
-  IElementType TAG_CLOSE = new MyTokenType("TAG_CLOSE");
-  IElementType TAG_OPEN = new MyTokenType("TAG_OPEN");
+  IElementType SIGN_LINK = new MyTokenType("~");
+  IElementType SIGN_PLS = new MyTokenType("+");
+  IElementType TAG_CLOSE = new MyTokenType("]]");
+  IElementType TAG_OPEN = new MyTokenType("[[");
 
   class Factory {
     public static PsiElement createElement(ASTNode node) {
