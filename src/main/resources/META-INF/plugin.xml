@@ -30,7 +30,7 @@
                   fieldName="INSTANCE"
                   language="My"
                   extensions="my"/>
-        <lang.substitutor language="HTML" implementationClass="com.example.mylanguage.lang.MyLanguageSubstitutor"/>
+       <!-- <lang.substitutor language="HTML" implementationClass="com.example.mylanguage.lang.MyLanguageSubstitutor"/>-->
         <lang.substitutor language="Smarty" implementationClass="com.example.mylanguage.lang.MyLanguageSubstitutor"/>
         <lang.parserDefinition language="My" implementationClass="com.example.mylanguage.lang.parser.MyParserDefinition"/>
         <lang.fileViewProviderFactory language="My" implementationClass="com.example.mylanguage.lang.MyFileViewProviderFactory"/>

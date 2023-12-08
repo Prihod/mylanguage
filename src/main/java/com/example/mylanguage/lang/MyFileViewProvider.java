@@ -5,6 +5,7 @@ import com.example.mylanguage.lang.psi.MyTypes;
 import com.intellij.lang.Language;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.LanguageSubstitutors;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
@@ -25,6 +26,8 @@ import java.util.concurrent.ConcurrentMap;
 
 public class MyFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider implements ConfigurableTemplateLanguageFileViewProvider {
 
+    private static final Logger LOG = Logger.getInstance(MyFileViewProvider.class);
+
     private final Language myBaseLanguage;
     private final Language myTemplateLanguage;
 
@@ -37,16 +40,6 @@ public class MyFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvi
 
         if (result != null) return result;
         TemplateDataElementType created = new TemplateDataElementType("My_TEMPLATE_DATA", lang, MyTypes.CONTENT, OUTER_ELEMENT_TYPE);
-       /* TemplateDataElementType created = new TemplateDataElementType("My_TEMPLATE_DATA", lang, MyTypes.CONTENT, OUTER_ELEMENT_TYPE) {
-            @Override
-            protected @NotNull TemplateDataModifications appendCurrentTemplateToken(int tokenEndOffset, @NotNull CharSequence tokenText) {
-                if (StringUtil.endsWithChar(tokenText, '=')) {
-                    //insert fake ="" for attributes inside html tags
-                    return TemplateDataModifications.fromRangeToRemove(tokenEndOffset, "\"\"");
-                }
-                return super.appendCurrentTemplateToken(tokenEndOffset, tokenText);
-            }
-        };*/
         TemplateDataElementType prevValue = TEMPLATE_DATA_TO_LANG.putIfAbsent(lang.getID(), created);
 
         return prevValue == null ? created : prevValue;
@@ -96,7 +89,7 @@ public class MyFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvi
 
     @Override
     public @NotNull Set<Language> getLanguages() {
-        return Set.of(myBaseLanguage, getTemplateDataLanguage(), SmartyLanguage.INSTANCE);
+        return Set.of(myBaseLanguage, getTemplateDataLanguage());
     }
 
     @Override

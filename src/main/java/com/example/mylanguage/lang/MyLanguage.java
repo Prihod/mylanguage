@@ -5,6 +5,8 @@ import com.intellij.lang.InjectableLanguage;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
+import com.jetbrains.smarty.SmartyFileType;
+import com.jetbrains.smarty.SmartyLanguage;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +16,8 @@ public class MyLanguage extends Language implements TemplateLanguage, Injectable
 
     @SuppressWarnings("SameReturnValue") // ideally this would be public static, but the static inits in the tests get cranky when we do that
     public static LanguageFileType getDefaultTemplateLang() {
-        return HtmlFileType.INSTANCE;
+        return SmartyFileType.INSTANCE;
+      //  return HtmlFileType.INSTANCE;
     }
 
     public MyLanguage() {
