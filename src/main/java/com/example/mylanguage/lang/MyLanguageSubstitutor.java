@@ -17,10 +17,7 @@ public class MyLanguageSubstitutor extends LanguageSubstitutor {
         if (file instanceof LightVirtualFile) {
             return null;
         }
-        if (
-                FileTypeRegistry.getInstance().isFileOfType(file, HtmlFileType.INSTANCE) ||
-                        FileTypeRegistry.getInstance().isFileOfType(file, SmartyFileType.INSTANCE)
-        ) {
+        if (FileTypeRegistry.getInstance().isFileOfType(file, SmartyFileType.INSTANCE)) {
             return MyLanguage.INSTANCE;
         }
         return null;

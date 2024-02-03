@@ -20,6 +20,7 @@ import com.jetbrains.smarty.SmartyLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -73,7 +74,6 @@ public class MyFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvi
         if (TemplateDataLanguageMappings.getTemplateableLanguages().contains(substituteLang)) {
             dataLang = substituteLang;
         }
-
         return dataLang;
     }
 
@@ -117,6 +117,29 @@ public class MyFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvi
         return null;
     }
 
+   /* @Nullable
+    @Override
+    protected PsiFile createFile(@NotNull Language lang) {
+        if (lang == getBaseLanguage()) {
+            return createFileInner(lang);
+        }
+        if (lang == getTemplateDataLanguage()) {
+            final PsiFileImpl file = (PsiFileImpl) createFileInner(lang);
+            IElementType type = getContentElementType(lang);
+            if (type != null) {
+                file.setContentElementType(type);
+            }
+
+          //  file.setContentElementType(TwigTemplateTokens.TEMPLATE_DATA);
+            return file;
+        }
+        return null;
+    }
+
+    private PsiFile createFileInner(Language lang) {
+        return LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
+    }
+*/
     @Override
     public @Nullable IElementType getContentElementType(@NotNull Language language) {
         if (language.is(getTemplateDataLanguage())) {
